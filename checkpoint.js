@@ -354,6 +354,39 @@ var cardGame = function(playerOneCards, playerTwoCards){
 BinarySearchTree.prototype.height = function(){
   // Tu código aca:
 
+ //Dos casos base principales, si el head no tiene valor
+  if (!this.value) {
+    return 0;
+  };
+
+  if (!this.left && !this.right) {
+    return 1;
+  };
+
+
+  // verificacion de extension de rama izquierda del head.
+  if (!this.left) {
+
+    return 1 + this.right.height();
+
+  };
+
+  // verificacion de rama derecha
+  if (!this.right) {
+
+    return 1 + this.left.height();
+
+  };
+
+  //Utiliazamos la  recursividad dentro del Math.max, ya que el resultado de la sumatoria recursiva
+  // que nos de mayor resultado sera igual a la cantidad de niveles del arbol.
+
+  var leftRecursive = this.left.height()
+
+  var rightRecursive = this.right.height()
+
+  return 1 + Math.max(leftRecursive, rightRecursive)
+
 }
 
 
@@ -374,9 +407,11 @@ BinarySearchTree.prototype.height = function(){
 
 
 var binarySearch = function (array, target) {
-  // Tu código aca:
+  
 
-}
+};
+
+
 
 // EJERCICIO 9
 // Ordená un arreglo de objetos usando un bubble sort pero con algunas particularidades.
