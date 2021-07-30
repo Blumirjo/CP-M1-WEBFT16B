@@ -253,6 +253,35 @@ LinkedList.prototype.switchPos = function(pos1, pos2){
 var mergeLinkedLists = function(linkedListOne, linkedListTwo){
   // Tu código aca:
 
+ // Lo primero que hare es crear la nueva lista que retornare al final
+      const myBeautiFullList = new LinkedList();
+
+ // Guardaré la referencia del head de cada uno de las listas pasadas como parametros en dos variables.
+      var headReference1 = linkedListOne.head
+
+      var headReference2 = linkedListTwo.head
+
+
+// El while a continuacion, se rompera  cuando el valor del next que guardan estas variables sea null...
+  
+    while (headReference1 && headReference2 ) {
+
+            //Agregamos los nodos a mi lista creada, en el orden correspondiente!
+
+             myBeautiFullList.add(headReference1.value)
+
+             myBeautiFullList.add(headReference2.value)
+
+            //Desplazamos la referencia next en cada una de las listas recibidas como parametros,
+            // hasta encontrar null, momento en el cual el while se rompera!
+  
+             headReference1 = headReference1.next;
+
+             headReference2 = headReference2.next;
+    };
+         //finalmente se retorna la nueva lista construida de la forma solicitada. <3
+     return myBeautiFullList;
+
 };
 
 
@@ -374,8 +403,43 @@ var binarySearch = function (array, target) {
 
 var specialSort = function(array, orderFunction) {
   // Tu código aca:
+   var uniSwap = true;
 
-}
+  while (uniSwap) {
+
+
+    uniSwap = false;
+
+
+    for (let i = 0; i < array.length - 1; i++) {
+
+       var Z = i + 1;
+
+       if (orderFunction(array[i], array[z]) === -1) {// si lo que el callback retorna es -1,
+ //procedemos a realizar el intercambio de orden
+
+            var aux = array[i];
+
+
+            array[i] = array[z];
+
+
+            array[z] = aux;
+
+
+            uniSwap = true;
+
+
+      }
+      //Cuando el for concluya el swap valdra false rompiendo el flujo del while...
+    }
+  }
+
+  //retorna nuestro array ordenado
+  return array;
+
+
+};
 
 // ----- Closures -----
 
@@ -407,8 +471,24 @@ var specialSort = function(array, orderFunction) {
 
 function closureDetect(symptoms, min) {
   // Tu código aca:
+    //instaciar funcion interna:
+  return function (pacienteCero) {
 
-}
+  var sintomatologia = 0;//contador de sintomas que coinciden con el primer parametro.
+
+    for (var i = 0; i < symptoms.length; i++) {
+
+      if (symptoms.includes(pacienteCero.symptoms[i])) {
+
+        sintomatologia++;
+      }
+    }
+
+
+   return sintomatologia >= min ? true : false;
+
+  }
+};
 
 // -------------------
 
