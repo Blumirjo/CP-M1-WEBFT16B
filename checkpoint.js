@@ -39,8 +39,30 @@ const {
 
 var isAncestor = function(genealogyTree, ancestor, descendant){
   // Tu código aca:
+   var abuelita = ancestor;// guardo ancestor en una variable
 
-}
+     for(var key in genealogyTree){// recorro el objeto
+
+        if(genealogyTree[key].includes(descendant)){// Usando includes compruebo de algun array tiene dentro al 
+        //decendiente para de esa forma rastrear a la madre.
+
+              var count = key;//si el includes es true, guardo la key que contiene al array en la variable count.     
+        }
+    };
+       
+    if(genealogyTree[abuelita].includes(count)){// caso base, en caso de se sea descendiente.
+  //la key que habiamos guardado en count es la madre, ahora preguntamos si el array que hay dentro 
+  //de abuelita tiene a la madre dentro.
+             return true;
+
+    }else if(!genealogyTree[abuelita].includes(count)){// caso base, en caso de que no lo sea...
+
+               return false;
+
+    };
+
+    isAncestor(genealogyTree,ancestor,count);
+};
 
 
 // EJERCICIO 2
@@ -77,8 +99,17 @@ var isAncestor = function(genealogyTree, ancestor, descendant){
 
 function secuenciaHenry(obj, n) {
   // Tu código aca:
+    if(n === 0) return 2;// caso base, puse 2 pero tambien podria haber puesto obj.first.
 
-}
+  else if(n === 1) return Object.keys(obj).length;// caso, aqui  Object.keys(obj).length es lo mismo que nueve, 
+  //convierto el objeto en array y tomo su length.
+
+  else if(n < 0) return null;// si el valor del parametro "n" es negativo retorna null;
+
+  return secuenciaHenry(obj,n-1) * secuenciaHenry(obj,n-2) - secuenciaHenry(obj,n-2);//llamadas recursivas correspondientes a la formula de sucesion...
+  // que van a reducir el parametro "n" hasta que su valor sea alguno de los casos base.
+
+};
 
 // ---------------------
 
@@ -98,8 +129,43 @@ function secuenciaHenry(obj, n) {
 
 LinkedList.prototype.size = function(){
   // Tu código aca:
+   if(!this.head) {//Si el head es null, debe retornar 0;
 
-}
+             return 0;
+  }
+   
+   else if(!this.head.next) { // Si no hay next, es decir, si es null, 
+    //el head seria el unico nodo de nuestra lista por lo tanto devolvere 1.
+
+             return 1;
+
+    }
+
+    else {
+
+      var lengthListCount = 1;//Esta variable la utilizare como contador
+
+
+      var current = this.head;
+
+
+      while (current.next) {// Cuando current.next sea null el while se va a romper.
+
+
+          current = current.next;//current va a mutar su valor reccorriendo nodo por 
+   //nodo hasta encontrar un next que valga null.
+
+          lengthListCount++;//Cada vez que el ciclo del while se repita significa que fue encontrado un nuevo nodo,
+    // y esta vaqriable reflejara la cantidad de nodos encontrados.
+
+     }
+
+    return lengthListCount;//Retornara mi contador, que refleja la cantidad de nodos recorridos por el while, 
+    //es decir el size de la lista.
+
+  }
+
+};
 
 
 // EJERCICIO 4
@@ -119,8 +185,59 @@ LinkedList.prototype.size = function(){
 
 LinkedList.prototype.switchPos = function(pos1, pos2){
   // Tu código aca:
+   if(!this.head) return false;// En caso de la lista este vacia retorno false :D
 
-}
+   if (pos1 > this.size() || pos2 > this.size()) return false; //Aplico la funcion creada en el ejercicio anterior para 
+    //comprobar si alguna de las posiciones dadas es superior al tamaño de la lista.
+
+   if(pos1 < 0 || pos2 < 0) return false;//Este if me permitira comprobar si alguna de las posiciones dadas son numeros negativos.
+
+  // Creare 4 variables, en dos de ellas guardare la referencia del this.head y las otras dos seran 
+  //contadores, cuya funcion sera compararse con cada uno de los indices de la lista hasta 
+  //encontrar los indices pedidos en los parametros, para luego realizar el intercambio.
+
+    var auxVarOne = this.head;
+
+    var auxVarTwo = this.head;
+
+    var countOne = 0;
+
+    var countTwo = 0;
+//Comienza la iteracion del primer while, en busca del nodo que corresponde al parametro "pos1"
+
+    while(countOne !== pos1) {
+
+      auxVarOne = auxVarOne.next;
+
+      countOne++;
+    };
+
+    var InterPos1 = auxVarOne.value;
+
+   //Finalizado el primer while, guarde el valor del nodo que coincide con
+   // la posicion del primer parametro, y repetire el proceso para el segundo parametro.
+
+    
+    while(countTwo !== pos2) {
+
+      auxVarTwo = auxVarTwo.next;
+
+      countTwo++;
+   }
+
+    var InterPos2 = auxVarTwo.value;
+
+
+    //Ahora bastan hacer los ultimos dos pasos, realizar el intercambio y si ya llego hasta alli retornara true. :D :D
+
+    auxVarOne.value = InterPos2;
+
+    auxVarTwo.value = InterPos1;
+
+    return true;
+
+};
+
 
 // EJERCICIO 5
 // Implementar la función mergeLinkedLists que, a partir de dos listas simplemente enlazadas 
@@ -136,7 +253,7 @@ LinkedList.prototype.switchPos = function(pos1, pos2){
 var mergeLinkedLists = function(linkedListOne, linkedListTwo){
   // Tu código aca:
 
-}
+};
 
 
 // ----------------------
